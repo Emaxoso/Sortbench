@@ -41,18 +41,19 @@ public class SortbenchAlgorithmTimSort extends SortbenchAlgorithm {
 
 	// this function sorts array from left index to  
     // to right index which is of size atmost RUN  
-    public static void insertionSort(int[] arr, int left, int right)  
+    public static void insertionSort(SortbenchDataset algorithmDataset, int left, int right)  
     { 
         for (int i = left + 1; i <= right; i++)  
         { 
-            int temp = arr[i]; 
+            int temp = algorithmDataset.datasetGet(i);
             int j = i - 1; 
-            while (arr[j] > temp && j >= left) 
-            { 
-                arr[j + 1] = arr[j]; 
+            while (algorithmDataset.datasetGet(j) > temp && j >= left) { 
+            	algorithmDataset.datasetSet(j + 1, algorithmDataset.datasetGet(j));
+            	
                 j--; 
             } 
-            arr[j + 1] = temp; 
+            
+            algorithmDataset.datasetSet(j + 1, temp);
         } 
     } 
   
@@ -66,11 +67,10 @@ public class SortbenchAlgorithmTimSort extends SortbenchAlgorithm {
         int[] right = new int[len2]; 
         for (int x = 0; x < len1; x++){ 
         	
-            left[x] = arr[l + x]; 
+            left[x] = algorithmDataset.datasetGet(l + x); 
         } 
-        for (int x = 0; x < len2; x++)  
-        { 
-            right[x] = arr[m + 1 + x]; 
+        for (int x = 0; x < len2; x++)  { 
+            right[x] = algorithmDataset.datasetGet(m + 1 + x); 
         } 
   
         int i = 0; 
@@ -81,31 +81,28 @@ public class SortbenchAlgorithmTimSort extends SortbenchAlgorithm {
         // in larger sub array  
         while (i < len1 && j < len2)  
         { 
-            if (left[i] <= right[j])  
-            { 
-                arr[k] = left[i]; 
+            if (left[i] <= right[j])  { 
+            	algorithmDataset.datasetSet(k, left[i]);
                 i++; 
             } 
-            else 
-            { 
-                arr[k] = right[j]; 
+            
+            else { 
+            	algorithmDataset.datasetSet(k, right[j]);
                 j++; 
             } 
             k++; 
         } 
   
         // copy remaining elements of left, if any  
-        while (i < len1) 
-        { 
-            arr[k] = left[i]; 
+        while (i < len1) { 
+        	algorithmDataset.datasetSet(k, left[i]);
             k++; 
             i++; 
         } 
   
         // copy remaining element of right, if any  
-        while (j < len2)  
-        { 
-            arr[k] = right[j]; 
+        while (j < len2)  { 
+        	algorithmDataset.datasetSet(k, right[j]);
             k++; 
             j++; 
         } 
