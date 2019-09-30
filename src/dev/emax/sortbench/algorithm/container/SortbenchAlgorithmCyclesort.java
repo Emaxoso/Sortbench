@@ -8,70 +8,67 @@ public class SortbenchAlgorithmCyclesort extends SortbenchAlgorithm {
 
 	@Override
 	public void algorithmCompute(SortbenchDataset algorithmDataset) {
-		radixsort(algorithmDataset, algorithmDataset.datasetSize());
+		 // count number of memory writes 
+        int writes = 0; 
+  
+        // traverse array elements and put it to on 
+        // the right place 
+        for (int cycle_start = 0; cycle_start <= algorithmDataset.datasetSize() - 2; cycle_start++) { 
+            // initialize item as starting point 
+            int item = algorithmDataset.datasetGet(cycle_start); 
+  
+            // Find position where we put the item. We basically 
+            // count all smaller elements on right side of item. 
+            int pos = cycle_start; 
+            for (int i = cycle_start + 1; i < algorithmDataset.datasetSize(); i++) 
+                if (algorithmDataset.datasetGet(i) < item) 
+                    pos++; 
+  
+            // If item is already in correct position 
+            if (pos == cycle_start) 
+                continue; 
+  
+            // ignore all duplicate elements 
+            while (item == algorithmDataset.datasetGet(pos)) 
+                pos += 1; 
+  
+            // put the item to it's right position 
+            if (pos != cycle_start) { 
+                int temp = item; 
+                item = algorithmDataset.datasetGet(pos); 
+                algorithmDataset.datasetSet(pos, temp); 
+                writes++; 
+            } 
+  
+            // Rotate rest of the cycle 
+            while (pos != cycle_start) { 
+                pos = cycle_start; 
+  
+                // Find position where we put the element 
+                for (int i = cycle_start + 1; i < algorithmDataset.datasetSize(); i++) 
+                    if (algorithmDataset.datasetGet(i) < item) 
+                        pos += 1; 
+  
+                // ignore all duplicate elements 
+                while (item == algorithmDataset.datasetGet(pos)) 
+                    pos += 1; 
+  
+                // put the item to it's right position 
+                if (item != algorithmDataset.datasetGet(pos)) { 
+                    int temp = item; 
+                    item = algorithmDataset.datasetGet(pos); 
+                    algorithmDataset.datasetSet(pos, temp); 
+                    writes++; 
+                } 
+            } 
+        } 
 	}
-
-	// A utility function to get maximum value in arr[]
-    static int getMax(SortbenchDataset arr, int n)
-    {
-        int mx = arr.datasetGet(0);
-        for (int i = 1; i < n; i++)
-            if (arr.datasetGet(i) > mx)
-                mx = arr.datasetGet(i);
-        return mx;
-    }
-
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
-    static void countSort(SortbenchDataset arr, int n, int exp)
-    {
-        int output[] = new int[n]; // output array
-        int i;
-        int count[] = new int[10];
-
-
-        // Store count of occurrences in count[]
-        for (i = 0; i < n; i++)
-            count[ (arr.datasetGet(i)/exp)%10 ]++;
-
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
-
-        // Build the output array
-        for (i = n - 1; i >= 0; i--)
-        {
-            output[count[ (arr.datasetGet(i)/exp)%10 ] - 1] = arr.datasetGet(i);
-            count[ (arr.datasetGet(i)/exp)%10 ]--;
-        }
-
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to curent digit
-        for (i = 0; i < n; i++)
-        	arr.datasetSet(i, output[i]);
-    }
-
-    // The main function to that sorts arr[] of size n using
-    // Radix Sort
-    static void radixsort(SortbenchDataset arr, int n)
-    {
-        // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
-
-        // Do counting sort for every digit. Note that instead
-        // of passing digit number, exp is passed. exp is 10^i
-        // where i is current digit number
-        for (int exp = 1; m/exp > 0; exp *= 10)
-            countSort(arr, n, exp);
-    }
-
 
 
 	@Override
 	public SortbenchAlgorithmInfo algorithmInfo() {
 		return SortbenchAlgorithmInfo.builder()
-				.algorithmName("Radix Sort")
+				.algorithmName("Cycle Sort")
 				.algorithmAuthor("-")
 				.algorithmYear("-")
 				.algorithmCaseBest("O(n)")
