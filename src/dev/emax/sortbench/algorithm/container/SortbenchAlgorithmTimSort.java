@@ -5,7 +5,7 @@ import dev.emax.sortbench.algorithm.SortbenchAlgorithmInfo;
 import dev.emax.sortbench.dataset.SortbenchDataset;
 
 public class SortbenchAlgorithmTimSort extends SortbenchAlgorithm {
-
+	/* SCUSA MA MI SCOCCIAVA TROPPO SISTEMARLO :P*/
 	 static int RUN = 32; 
 	
 	@Override
@@ -112,7 +112,7 @@ public class SortbenchAlgorithmTimSort extends SortbenchAlgorithm {
 	@Override
 	public SortbenchAlgorithmInfo algorithmInfo() {
 		return SortbenchAlgorithmInfo.builder()
-				.algorithmName("Selection Sort")
+				.algorithmName("Tim Sort")
 				.algorithmAuthor("-")
 				.algorithmYear("-")
 				.algorithmCaseBest("O(n^2)")

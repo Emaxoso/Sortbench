@@ -8,9 +8,7 @@ public class SortbenchAlgorithmCyclesort extends SortbenchAlgorithm {
 
 	@Override
 	public void algorithmCompute(SortbenchDataset algorithmDataset) {
-		 // count number of memory writes 
-        int writes = 0; 
-  
+
         // traverse array elements and put it to on 
         // the right place 
         for (int cycle_start = 0; cycle_start <= algorithmDataset.datasetSize() - 2; cycle_start++) { 
@@ -37,7 +35,6 @@ public class SortbenchAlgorithmCyclesort extends SortbenchAlgorithm {
                 int temp = item; 
                 item = algorithmDataset.datasetGet(pos); 
                 algorithmDataset.datasetSet(pos, temp); 
-                writes++; 
             } 
   
             // Rotate rest of the cycle 
@@ -58,7 +55,6 @@ public class SortbenchAlgorithmCyclesort extends SortbenchAlgorithm {
                     int temp = item; 
                     item = algorithmDataset.datasetGet(pos); 
                     algorithmDataset.datasetSet(pos, temp); 
-                    writes++; 
                 } 
             } 
         } 
