@@ -8,10 +8,10 @@ public class SortbenchAlgorithmBubblesort extends SortbenchAlgorithm {
 
 	@Override
 	public void algorithmCompute(SortbenchDataset algorithmDataset) {
-		for (int i = 0; i < algorithmDataset.datasetSize(); i++) {
-			for (int j = 1; j < (algorithmDataset.datasetSize() - i); j++) {
-				if (algorithmDataset.datasetGet(j - 1) > algorithmDataset.datasetGet(j)) {
-					algorithmDataset.datasetSwap(j - 1, j);
+		for (int algorithmDatasetIndexI = 0; algorithmDatasetIndexI < algorithmDataset.datasetSize(); algorithmDatasetIndexI++) {
+			for (int algorithmDatasetIndexJ = 1; algorithmDatasetIndexJ < (algorithmDataset.datasetSize() - algorithmDatasetIndexI); algorithmDatasetIndexJ++) {
+				if (algorithmDataset.datasetGet(algorithmDatasetIndexJ - 1) > algorithmDataset.datasetGet(algorithmDatasetIndexJ)) {
+					algorithmDataset.datasetSwap(algorithmDatasetIndexJ - 1, algorithmDatasetIndexJ);
 				}
 			}
 		}
