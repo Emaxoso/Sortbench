@@ -3,7 +3,7 @@ package dev.emax.sortbench.algorithm;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmBubblesort;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmCyclesort;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmHeapsort;
-import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmInsertsort;
+import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmInsertionsort;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmMergesort;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmPigeonholesort;
 import dev.emax.sortbench.algorithm.container.SortbenchAlgorithmQuicksort;
@@ -24,7 +24,7 @@ public enum SortbenchAlgorithmRegistry {
 	ALGORITHM_BUBBLESORT(new SortbenchAlgorithmBubblesort()),
 	ALGORITHM_COCKTAILSHAKERSORT(new SortbenchAlgorithmShakersort()),
 	ALGORITHM_HEAPSORT(new SortbenchAlgorithmHeapsort()),
-	ALGORITHM_INSERTSORT(new SortbenchAlgorithmInsertsort()),
+	ALGORITHM_INSERTSORT(new SortbenchAlgorithmInsertionsort()),
 	ALGORITHM_QUICKSORT(new SortbenchAlgorithmQuicksort()),	
 	ALGORITHM_RADIXSORT(new SortbenchAlgorithmRadixsort()),
 	ALGORITHM_SELECTIONSORT(new SortbenchAlgorithmSelectionsort()),

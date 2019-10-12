@@ -8,39 +8,34 @@ public class SortbenchAlgorithmHeapsort extends SortbenchAlgorithm {
 
 	@Override
 	public void algorithmCompute(SortbenchDataset algorithmDataset) {
-		int n = algorithmDataset.datasetSize();
+		int datasetSize = algorithmDataset.datasetSize();
 
-		// Build heap (rearrange array)
-		for (int i = n / 2 - 1; i >= 0; i--)
-			heapify(algorithmDataset, n, i);
+		for (int datasetIndex = datasetSize / 2 - 1; datasetIndex >= 0; datasetIndex--) {
+			algorithmHeapfy(algorithmDataset, datasetSize, datasetIndex);
+		}
 
-		// One by one extract an element from heap
-		for (int i = n - 1; i >= 0; i--) {
-			// Move current root to end
-			algorithmDataset.datasetSwap(0, i);
-
-			// call max heapify on the reduced heap
-			heapify(algorithmDataset, i, 0);
+		for (int datasetIndex = datasetSize - 1; datasetIndex >= 0; datasetIndex--) {
+			algorithmDataset.datasetSwap(0, datasetIndex);
+			algorithmHeapfy(algorithmDataset, datasetIndex, 0);
 		}
 	}
 
-	private void heapify(SortbenchDataset algorithmDataset, int n, int i) {
-		int largest = i; // Initialize largest as root
-		int l = 2 * i + 1; // left = 2*i + 1
-		int r = 2 * i + 2; // right = 2*i + 2
+	private void algorithmHeapfy(SortbenchDataset algorithmDataset, int datasetIndexStart, int datasetIndexEnd) {
+		int datasetIndexLargest = datasetIndexEnd;
+		int datasetIndexLeft = 2 * datasetIndexEnd + 1;
+		int datasetIndexRight = 2 * datasetIndexEnd + 2;
 
-		// If left child is larger than root
-		if (l < n && algorithmDataset.datasetGet(l) > algorithmDataset.datasetGet(largest)) largest = l;
-
-		// If right child is larger than largest so far
-		if (r < n && algorithmDataset.datasetGet(r) > algorithmDataset.datasetGet(largest)) largest = r;
-
-		// If largest is not root
-		if (largest != i) {
-			algorithmDataset.datasetSwap(i, largest);
-
-			// Recursively heapify the affected sub-tree
-			heapify(algorithmDataset, n, largest);
+		if (datasetIndexLeft < datasetIndexStart && algorithmDataset.datasetGet(datasetIndexLeft) > algorithmDataset.datasetGet(datasetIndexLargest)) {
+			datasetIndexLargest = datasetIndexLeft;
+		}
+		
+		if (datasetIndexRight < datasetIndexStart && algorithmDataset.datasetGet(datasetIndexRight) > algorithmDataset.datasetGet(datasetIndexLargest)) {
+			datasetIndexLargest = datasetIndexRight;
+		}
+		
+		if (datasetIndexLargest != datasetIndexEnd) {
+			algorithmDataset.datasetSwap(datasetIndexEnd, datasetIndexLargest);
+			algorithmHeapfy(algorithmDataset, datasetIndexStart, datasetIndexLargest);
 		}
 	}
 
@@ -54,6 +49,4 @@ public class SortbenchAlgorithmHeapsort extends SortbenchAlgorithm {
 				.algorithmCaseWorst("O(n log n)")
 				.build();
 	}
-
-
 }
