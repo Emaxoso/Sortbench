@@ -10,28 +10,31 @@ public class SortbenchAlgorithmPigeonholesort extends SortbenchAlgorithm {
 	public void algorithmCompute(SortbenchDataset algorithmDataset) {
 		int datasetMin = algorithmDataset.datasetGet(0);
 		int datasetMax = algorithmDataset.datasetGet(0);
-		int range, i, j, index;
+		int datasetRange, datasetIndexI, datasetIndexJ, datasetCursor;
 
-		for (int a = 0; a < algorithmDataset.datasetSize(); a++) {
-			if (algorithmDataset.datasetGet(a) > datasetMax) {
-				datasetMax = algorithmDataset.datasetGet(a);				
+		for (int datasetIndex = 0; datasetIndex < algorithmDataset.datasetSize(); datasetIndex++) {
+			if (algorithmDataset.datasetGet(datasetIndex) > datasetMax) {
+				datasetMax = algorithmDataset.datasetGet(datasetIndex);				
 			}
-			if (algorithmDataset.datasetGet(a) < datasetMin)
-				datasetMin = algorithmDataset.datasetGet(a);
+			if (algorithmDataset.datasetGet(datasetIndex) < datasetMin) {
+				datasetMin = algorithmDataset.datasetGet(datasetIndex);
+			}
 		}
 
-		range = datasetMax - datasetMin + 1;		
+		datasetRange = datasetMax - datasetMin + 1;		
 		
-		int[] phole = new int[range];			
+		int[] datasetPigeonhole = new int[datasetRange];			
 		
-		for (i = 0; i < algorithmDataset.datasetSize(); i++)
-			phole[algorithmDataset.datasetGet(i) - datasetMin]++;
+		for (datasetIndexI = 0; datasetIndexI < algorithmDataset.datasetSize(); datasetIndexI++) {
+			datasetPigeonhole[algorithmDataset.datasetGet(datasetIndexI) - datasetMin]++;
+		}
 
-		index = 0;
-
-		for (j = 0; j < range; j++)
-			while (phole[j]-- > 0)
-				algorithmDataset.datasetSet(index++, j + datasetMin);
+		datasetCursor = 0;
+		for (datasetIndexJ = 0; datasetIndexJ < datasetRange; datasetIndexJ++) {
+			while (datasetPigeonhole[datasetIndexJ]-- > 0) {
+				algorithmDataset.datasetSet(datasetCursor++, datasetIndexJ + datasetMin);
+			}
+		}
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class SortbenchAlgorithmPigeonholesort extends SortbenchAlgorithm {
 				.algorithmAuthor("-")
 				.algorithmYear("-")
 				.algorithmCaseBest("O(n)")
-				.algorithmCaseWorst("O(kN)")
+				.algorithmCaseWorst("O(N + n)")
 				.build();
 	}
 
