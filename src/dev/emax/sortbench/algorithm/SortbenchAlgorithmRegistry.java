@@ -23,8 +23,6 @@ public enum SortbenchAlgorithmRegistry {
 
 	ALGORITHM_BUBBLESORT(new SortbenchAlgorithmBubblesort()),
 	ALGORITHM_COCKTAILSHAKERSORT(new SortbenchAlgorithmShakersort()),
-	//ALGORITHM_EMAXSORT(new SortbenchAlgorithmEmaxsort()),
-	//ALGORITHM_GIANLOSORT(new SortbenchAlgorithmGianlosort()),
 	ALGORITHM_HEAPSORT(new SortbenchAlgorithmHeapsort()),
 	ALGORITHM_INSERTSORT(new SortbenchAlgorithmInsertsort()),
 	ALGORITHM_QUICKSORT(new SortbenchAlgorithmQuicksort()),	
