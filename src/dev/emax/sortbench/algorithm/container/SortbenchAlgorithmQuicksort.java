@@ -11,15 +11,9 @@ public class SortbenchAlgorithmQuicksort extends SortbenchAlgorithm {
 		sort(algorithmDataset, 0, algorithmDataset.datasetSize() - 1);
 	}
 
-	void sort(SortbenchDataset algorithmDataset, int low, int high) {
-        if (low < high)
-        {
-            /* pi is partitioning index, arr[pi] is
-              now at right place */
+	public void sort(SortbenchDataset algorithmDataset, int low, int high) {
+        if (low < high) {			
             int pi = partition(algorithmDataset, low, high);
-
-            // Recursively sort elements before
-            // partition and after partition
             sort(algorithmDataset, low, pi-1);
             sort(algorithmDataset, pi+1, high);
         }
