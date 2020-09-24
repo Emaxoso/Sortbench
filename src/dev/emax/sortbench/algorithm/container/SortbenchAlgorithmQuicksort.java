@@ -21,19 +21,15 @@ public class SortbenchAlgorithmQuicksort extends SortbenchAlgorithm {
 
 	int partition(SortbenchDataset arr, int low, int high) {
 		int pivot = arr.datasetGet(high);
-		int i = (low - 1); // index of smaller element
+		int i = (low - 1); 
 		for (int j = low; j < high; j++) {
-			// If current element is smaller than or
-			// equal to pivot
 			if (arr.datasetGet(j) <= pivot) {
 				i++;
-
-				// swap arr[i] and arr[j]
+				
 				arr.datasetSwap(i, j);
 			}
 		}
 
-		// swap arr[i+1] and arr[high] (or pivot)
 		arr.datasetSwap(i + 1, high);
 
 		return i + 1;
